@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-light: #FFB6C1;
+            --pink-medium: #FFC0CB;
+            --rose: #FF69B4;
+            --lavender: #E6E6FA;
+            --peach: #FFDAB9;
+            --white: #FFFFFF;
+            --text-dark: #4A4A4A;
+            --gradient-1: linear-gradient(135deg, #FFB6C1 0%, #E6E6FA 100%);
+            --gradient-2: linear-gradient(135deg, #FFDAB9 0%, #FFC0CB 100%);
+            --gradient-3: linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Floating Hearts Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--rose);
+            opacity: 0;
+            animation: floatHeart 8s infinite ease-in-out;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Landing Section */
+        .landing-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            position: relative;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .landing-content {
+            z-index: 2;
+            animation: fadeInScale 1.5s ease-out;
+        }
+
+        .main-title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--white);
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .scroll-indicator::before {
+            content: '❤';
+            font-size: 30px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .scroll-indicator::after {
+            content: 'Scroll Down';
+            font-size: 14px;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--rose);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .apology-text {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-dark);
+            padding: 0 20px;
+        }
+
+        /* Reasons Section */
+        .reasons-section {
+            background: var(--gradient-2);
+            padding: 80px 20px;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reason-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            transition: all 0.5s ease, transform 0.3s ease;
+        }
+
+        .reason-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+        }
+
+        .reason-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .reason-text {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        /* Promises Section */
+        .promises-section {
+            background: var(--lavender);
+            padding: 80px 20px;
+        }
+
+        .promises-list {
+            max-width: 800px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .promise-item {
+            background: var(--white);
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--rose);
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.5s ease;
+        }
+
+        .promise-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .promise-item::before {
+            content: '💝 ';
+            margin-right: 10px;
+        }
+
+        /* Interactive Button Section */
+        .forgiveness-section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-3);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .forgiveness-button {
+            background: var(--white);
+            color: var(--rose);
+            border: none;
+            padding: 25px 60px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            margin-top: 30px;
+        }
+
+        .forgiveness-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .forgiveness-button:active {
+            transform: scale(0.95);
+        }
+
+        .response-message {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            animation: fadeInScale 1s ease;
+            max-width: 700px;
+        }
+
+        .response-message.show {
+            display: block;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--rose);
+            position: absolute;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Final Section */
+        .final-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .final-title {
+            font-size: clamp(3rem, 12vw, 8rem);
+            color: var(--white);
+            font-weight: 700;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .final-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--white);
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 60px 20px;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .forgiveness-button {
+                padding: 20px 40px;
+                font-size: 1.2rem;
+            }
+
+            .promise-item {
+                font-size: 1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Landing Section -->
+    <section class="landing-section">
+        <div class="landing-content">
+            <h1 class="main-title">I'm Sorry</h1>
+            <p class="subtitle">For whatever happened between us. </p>
+        </div>
+        <div class="scroll-indicator" onclick="scrollToNext()"></div>
+    </section>
+
+    <!-- Apology Message Section -->
+    <section class="content-section apology-section">
+        <h2 class="section-title">An apology that can not undo things.</h2>
+        <p class="apology-text">
+           I know how badly I messed up before, with the emotional dependency, and pressure I put on you. I understand that. I learnt a lot in the past few months, other than pain and other trauma, but I learnt.
+        </p>
+        <p class="apology-text">
+            I understand you taking so much time, it takes time to heal and forgive. What I did was wrong, and I take full responsibility for my actions. There's no excuse for what happened.
+        </p>
+        <p class="apology-text">
+            You mean A LOT to me. Your smile, your laugh, the way I feel safe with you than with others. I don't want to lose any of that. I don't want to lose you. You make my world brighter, and I'm so sorry for dimming that light.
+        </p>
+        <p class="apology-text">
+            I promise to be more thoughtful, more caring, and more mindful of your what you feel. I promise to communicate better and to always consider how my actions affect you. You deserve nothing but the best, and I want to be better for you.
+        </p>
+    </section>
+
+    <!-- Reasons Section -->
+    <section class="reasons-section">
+        <h2 class="section-title" style="color: var(--white);">Why do you matter so much to me? </h2>
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <div class="reason-icon">😊</div>
+                <p class="reason-text">Your smile makes me happier!!! </p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">💕</div>
+                <p class="reason-text">You inspire me to live, despite of eveything I have been going through.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">✨</div>
+                <p class="reason-text">You care a lot, don't you?</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">😄</div>
+                <p class="reason-text">Your sqeaky laugh, that I have not heard in months, is one of my favourite things to hear.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">🌟</div>
+                <p class="reason-text">Small moments with you feel, really special. </p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">💪</div>
+                <p class="reason-text">Your strength and resilience amaze me constantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promises Section -->
+    <section class="promises-section">
+        <h2 class="section-title">I can promise, and keep the promises.</h2>
+        <ul class="promises-list">
+            <li class="promise-item">I promise to live. </li>
+            <li class="promise-item">I promise to listen more carefully to your feelings.</li>
+            <li class="promise-item">I promise to think before I act and consider your perspective.</li>
+            <li class="promise-item">I promise to be in control of my emotions, and not become dependent on you. </li>            
+            <li class="promise-item">I promise to communicate openly and honestly with you.</li>
+            <li class="promise-item">I promise to cherish every moment we have together</li>
+            <li class="promise-item">I promise to be the partner you deserve.</li>
+        </ul>
+    </section>
+
+    <!-- Forgiveness Section -->
+    <section class="forgiveness-section">
+        <h2 class="section-title" style="color: var(--white); font-size: clamp(2rem, 6vw, 4rem);">I Need You to Know...</h2>
+        <button class="forgiveness-button" id="forgivenessBtn">Will you forgive me?</button>
+        <div class="response-message" id="responseMessage">
+            Pakka? I won't let you down. I love you more than words can convey. ❤️
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="final-section">
+        <h1 class="final-title">I Love You</h1>
+        <p class="final-subtitle">More than you'll ever know</p>
+    </section>
+
+    <script>
+        // Floating Hearts
+        function createHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 300);
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.content-section, .reason-card, .promise-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Staggered animation for reason cards
+        const reasonCards = document.querySelectorAll('.reason-card');
+        reasonCards.forEach((card, index) => {
+            card.style.transitionDelay = (index * 0.1) + 's';
+        });
+
+        // Staggered animation for promises
+        const promiseItems = document.querySelectorAll('.promise-item');
+        promiseItems.forEach((item, index) => {
+            item.style.transitionDelay = (index * 0.15) + 's';
+        });
+
+        // Scroll to next section
+        function scrollToNext() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        // Forgiveness button interaction
+        const forgivenessBtn = document.getElementById('forgivenessBtn');
+        const responseMessage = document.getElementById('responseMessage');
+
+        forgivenessBtn.addEventListener('click', function() {
+            // Hide button
+            this.style.display = 'none';
+            
+            // Show response message
+            responseMessage.classList.add('show');
+            
+            // Create confetti effect
+            createConfetti();
+            
+            // Create burst of hearts
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        });
+
+        function createConfetti() {
+            const colors = ['#FFB6C1', '#FF69B4', '#E6E6FA', '#FFDAB9', '#FFC0CB'];
+            const forgivenessSection = document.querySelector('.forgiveness-section');
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '0';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                forgivenessSection.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
